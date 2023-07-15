@@ -1,25 +1,21 @@
 fn main() {
-    let s1 = gives_ownership();         // gives_ownership 将返回值
-                                        // 移给 s1
+    let string1 = String::from("abcd");
+    let string2 = "xyz";
 
-    let s2 = String::from("hello");     // s2 进入作用域
-
-    let s3 = takes_and_gives_back(s2);  // s2 被移动到
-                                        // takes_and_gives_back 中,
-                                        // 它也将返回值移给 s3
-} // 这里, s3 移出作用域并被丢弃。s2 也移出作用域，但已被移走，
-  // 所以什么也不会发生。s1 移出作用域并被丢弃
-
-fn gives_ownership() -> String {             // gives_ownership 将返回值移动给
-                                             // 调用它的函数
-
-    let some_string = String::from("hello"); // some_string 进入作用域.
-
-    some_string                              // 返回 some_string 并移出给调用的函数
+    let result = longest(string1.as_str(), string2);
+    println!("The longest string is {}", result);
+}
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    //生命周期标注本身不具有意义,其作用是告诉编译器多个引用之间的关系.
+    // 'a的含义是: 生命周期>='a, 所以x,y和返回值至少活得和'a一样久. 
+    //  因为有>号的存在，函数参数x和y的生命周期可能不一样.
+    //  返回值的生命周期 与 参数中生命周期较小者 保持一致.
+    //  当把具体的引用传给longest函数时, 'a的大小等于x和y中生命周期较小者.
+    
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
 }
 
-// takes_and_gives_back 将传入字符串并返回该值
-fn takes_and_gives_back(a_string: String) -> String { // a_string 进入作用域
-
-    a_string  // 返回 a_string 并移出给调用的函数
-}
