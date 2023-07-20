@@ -1,4 +1,4 @@
-### Rust学习笔记之（三）：特征 特征对象
+### Rust Note2 特征与特征对象
 
 1. Trait之于Rust, Interface之于Go.
 

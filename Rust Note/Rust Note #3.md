@@ -1,4 +1,4 @@
-### Rust学习笔记（二）：Rust的五种复合类型之字符串
+### Rust Note #3 Rust的字符串
 
 1. Rust字符串String不允许下标索引字符。
 
